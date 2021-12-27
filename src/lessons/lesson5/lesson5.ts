@@ -30,7 +30,7 @@ type someObjType = {
     age: number;
 }
 
-let someObj:someObjType = {
+let someObj: someObjType = {
     name: 'Eugene',
     age: 32
 }
@@ -55,7 +55,11 @@ let someObj:someObjType = {
 // Task 05 есть 2 объекта One и Two. С помощью bind и метода sayHello заставьте поздороваться объект One
 
 let One = {name: 'One'};
-let Two = {name: 'Two', sayHello: function() {console.log(`Hello, my name is ${this.name}`)}};
+let Two = {
+    name: 'Two', sayHello: function () {
+        console.log(`Hello, my name is ${this.name}`)
+    }
+};
 
 // Task 06
 // создайте объект helperObj у которого есть следующие методы:
@@ -67,7 +71,9 @@ let Two = {name: 'Two', sayHello: function() {console.log(`Hello, my name is ${t
 // Bind
 // 1) Дана функция sumTwoNumbers, реализовать функцию bindNumber которая принимает функцию sumTwoNumbers и число, и
 // возвращает другую функцию, которое также принимает число и возвращает сумму этих чисел. Замыкание использовать нельзя
-function sumTwoNumbers(a:number,b:number):number {return a + b};
+function sumTwoNumbers(a: number, b: number): number {
+    return a + b
+};
 
 // 2) Напишите функцию которая принимает первым аргументом объект One, а вторым helperObj. Данная функция
 // возвращает другую функцию которая принимает строку в качестве аргумента и устанавливает ее свойству name объекта One
@@ -77,6 +83,31 @@ function sumTwoNumbers(a:number,b:number):number {return a + b};
 // Реализовать задачи 2-4 из Bind с помощью Call
 
 
-
 // just a plug
-export default () => {};
+export default () => {
+};
+
+
+// let obj = { name: 'Chukcha'}
+// let obj2 = {
+//     name: 'Vasilisa',
+//     sayName(a: any, b: any) {
+//         console.log(`My name is ${this.name}. Arg1 = ${a} and Arg2 = ${b}`)
+//     }
+// }
+// // короткий вызов
+// obj2.sayName.bind(obj, 50)( 150)
+// let bindedFunction = obj2.sayName.bind(obj)
+// bindedFunction()
+
+let obj = {name: 'Chukcha'}
+let obj2 = {
+    name: 'Vasilisa',
+    sayName(method: any, a: any, b: any) {
+        console.log(`My name is ${this.name}. Method is ${method}. Arg1 = ${a} and Arg2 = ${b}`)
+    }
+}
+
+obj2.sayName.bind(obj)("bind",1, 3)
+obj2.sayName.call(obj,"call", 10, 50)
+obj2.sayName.apply(obj, ["apply",200, 300])

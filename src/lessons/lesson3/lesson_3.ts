@@ -18,10 +18,3 @@ console.log('lesson 3');
 
 // just a plug
 export default ()=>{};
-
-let pr = new Promise( (resolve, reject) => {
-    resolve()
-    reject()
-})
-
-console.log(pr)
