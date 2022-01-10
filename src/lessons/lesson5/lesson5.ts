@@ -108,6 +108,10 @@ let obj2 = {
     }
 }
 
+let obj3 = {name: "Vlad"}
+
 obj2.sayName.bind(obj)("bind",1, 3)
 obj2.sayName.call(obj,"call", 10, 50)
 obj2.sayName.apply(obj, ["apply",200, 300])
+
+obj2.sayName.bind(obj, "group",0).bind(obj3, 100)()

@@ -7,6 +7,69 @@ console.log('Lesson 6');
 // https://www.youtube.com/watch?v=BASquaxab_w
 // https://www.youtube.com/watch?v=uLY9GXGMXaA
 
+
+// function Test(name, age) {
+//     this.name = name
+//     this.age = age
+// //     this.sayName = function() {console.log(this.name)}
+// }
+//
+// Test.prototype.sayName = function() {console.log(this.name)}
+//
+// let person = new Test ('Alexey', 33)
+// console.log(person)
+
+
+// console.dir(function (){})
+// console.dir(class {})
+
+// class Test {
+// //типизация полей объекта который этот класс создаст
+//     name: string
+//     age: number
+//
+//     constructor(name: string, age: number) //отдельная типизация аргументов для конструктора
+//     {
+//         this.name = name
+//         this.age = age
+//     }
+//     //для того чтобы отправить метод в Prototype, также не требует типизации
+//     sayName() {
+//         console.log(this.name)
+//     }
+//     sayBye = () => {
+//         console.log(this.age)
+//     }
+// }
+// //@ts-ignore  ОЧЕНЬ СТРАННОЕ РЕШЕНИЕ
+// Test.prototype.sayName = function() {console.log(this.name)}
+//
+// let person = new Test('Alexey', 34)
+// console.log(person)
+
+class Test {
+    name: string
+    age: number
+    bindedSayName: Function
+
+    constructor(name: string, age: number)
+    {
+        this.name = name
+        this.age = age
+        this.bindedSayName = this.sayName.bind(this)
+    }
+    sayName() {
+        console.log(this.name)
+    }
+    sayBye = () => {
+        console.log(this.age)
+    }
+}
+
+let person = new Test('Alexey', 34)
+console.log(person)
+
+
 // Task 01
 // Создайте структуру с именем student, содержащую поля: имя и фамилия, номер группы, успеваемость (массив из пяти элементов).
 // Создать массив из десяти элементов такого типа, упорядочить записи по возрастанию среднего балла.
