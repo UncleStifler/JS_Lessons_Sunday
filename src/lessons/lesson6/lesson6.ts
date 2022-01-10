@@ -47,28 +47,90 @@ console.log('Lesson 6');
 // let person = new Test('Alexey', 34)
 // console.log(person)
 
-class Test {
+// class Test {
+//     name: string
+//     age: number
+//     bindedSayName: Function
+//
+//     constructor(name: string, age: number)
+//     {
+//         this.name = name
+//         this.age = age
+//          this.bindedSayName = this.sayName.bind(this)
+//     }
+//     sayName() {
+//         console.log(this.name)
+//     }
+//     sayBye = () => {
+//         console.log(this.age)
+//     }
+// }
+//
+// let person = new Test('Alexey', 34)
+// console.log(person)
+
+
+interface ITest {
     name: string
     age: number
-    bindedSayName: Function
+    sayName: Function
+}
 
-    constructor(name: string, age: number)
-    {
-        this.name = name
-        this.age = age
-        this.bindedSayName = this.sayName.bind(this)
+interface ITest2 {
+    name: string
+    sayYo: Function
+}
+
+class Test implements ITest, ITest2 {
+    name: string
+    age: number
+
+    constructor(name: string, age: number) {
+        this.name = name;
+        this.age = age;
     }
+
     sayName() {
-        console.log(this.name)
+        console.log(`Здраствуйте ${this.name}`)
     }
+
+    sayYo() {
+    }
+
+    // Интерфейсы не препятсвуют расширению классов
     sayBye = () => {
-        console.log(this.age)
     }
 }
 
-let person = new Test('Alexey', 34)
-console.log(person)
 
+// создаем интерфейс с разширением предыдущих сущностей
+interface IPerson extends ITest, ITest2 {
+    city: string
+    sayBla: Function
+}
+
+// создание наследования со своей отдельной типизацией
+class Person extends Test implements IPerson {
+    city: string
+
+    constructor(name: string, age: number, city: string) {
+        super(name, age);
+        this.city = city
+    }
+
+    sayBla() {
+        console.log(`Привет ${this.name} из ${this.city}`)
+    }
+    sayName() {
+        console.log('yo yo yo')
+        super.sayName()
+    }
+}
+
+let somePerson = new Person("Anna", 25, "Madrid")
+somePerson.sayBla()
+somePerson.sayName()
+console.log(somePerson)
 
 // Task 01
 // Создайте структуру с именем student, содержащую поля: имя и фамилия, номер группы, успеваемость (массив из пяти элементов).
