@@ -70,67 +70,41 @@ console.log('Lesson 6');
 // console.log(person)
 
 
-interface ITest {
-    name: string
-    age: number
-    sayName: Function
-}
+class Test {
+    name : string
 
-interface ITest2 {
-    name: string
-    sayYo: Function
-}
-
-class Test implements ITest, ITest2 {
-    name: string
-    age: number
-
-    constructor(name: string, age: number) {
-        this.name = name;
-        this.age = age;
-    }
-
-    sayName() {
-        console.log(`Здраствуйте ${this.name}`)
-    }
-
-    sayYo() {
-    }
-
-    // Интерфейсы не препятсвуют расширению классов
-    sayBye = () => {
-    }
-}
-
-
-// создаем интерфейс с разширением предыдущих сущностей
-interface IPerson extends ITest, ITest2 {
-    city: string
-    sayBla: Function
-}
-
-// создание наследования со своей отдельной типизацией
-class Person extends Test implements IPerson {
-    city: string
-
-    constructor(name: string, age: number, city: string) {
-        super(name, age);
-        this.city = city
-    }
-
-    sayBla() {
-        console.log(`Привет ${this.name} из ${this.city}`)
+    static staticParam = 10
+    constructor(name: string) {
+        this.name = name
     }
     sayName() {
-        console.log('yo yo yo')
-        super.sayName()
+        console.log(this.name)
+    }
+    static someStaticMethod () {
+        console.log("Зелёная фасоль")
+        return "Несварение"
     }
 }
 
-let somePerson = new Person("Anna", 25, "Madrid")
-somePerson.sayBla()
-somePerson.sayName()
-console.log(somePerson)
+let testObj = new Test("PLaton")
+
+console.log(Test.someStaticMethod())
+
+
+class Test2 extends Test {
+    static staticParam = 50
+
+    static someStaticMethod () {
+        return "Статическое воскование"
+    }
+}
+
+let testObj2 = new Test2("Toshiba")
+console.log(testObj2)
+console.log(Test.staticParam)
+console.dir(Test2)
+
+
 
 // Task 01
 // Создайте структуру с именем student, содержащую поля: имя и фамилия, номер группы, успеваемость (массив из пяти элементов).
