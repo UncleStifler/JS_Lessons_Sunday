@@ -1,7 +1,37 @@
+import {log} from "util";
+
 console.log('lesson 4');
 
 // http://latentflip.com/loupe/?code=JC5vbignYnV0dG9uJywgJ2NsaWNrJywgZnVuY3Rpb24gb25DbGljaygpIHsKICAgIHNldFRpbWVvdXQoZnVuY3Rpb24gdGltZXIoKSB7CiAgICAgICAgY29uc29sZS5sb2coJ1lvdSBjbGlja2VkIHRoZSBidXR0b24hJyk7ICAgIAogICAgfSwgMjAwMCk7Cn0pOwoKY29uc29sZS5sb2coIkhpISIpOwoKc2V0VGltZW91dChmdW5jdGlvbiB0aW1lb3V0KCkgewogICAgY29uc29sZS5sb2coIkNsaWNrIHRoZSBidXR0b24hIik7Cn0sIDUwMDApOwoKY29uc29sZS5sb2coIldlbGNvbWUgdG8gbG91cGUuIik7!!!PGJ1dHRvbj5DbGljayBtZSE8L2J1dHRvbj4%3D
 // https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/
+
+// console.log('Start')
+//
+// async function f() {
+//     try {
+//         console.log('Function start')
+//         let result = await new Promise(res => {
+//             setTimeout(res, 2000, 'Done')
+//         })
+//         console.log(result)
+//         // ниже не отпработает опка не вернется Resolve
+//         let result1 = await new Promise(res => {
+//             setTimeout(res, 2000, 'Done')
+//         })
+//         console.log(result1)
+//         // ниже не отпработает опка не вернется Resolve
+//         let result2 = await new Promise(res => {
+//             setTimeout(res, 2000, 'Done')
+//         })
+//         console.log(result2)
+//         console.log('Function end')
+//     } catch (e) {
+//
+//     }
+// }
+//
+// f()
+// console.log('end')
 
 
 // Task 01
@@ -41,6 +71,45 @@ console.log('lesson 4');
 // свойства resolve и reject получают ссылки на соответствующие функции
 // resolve и reject. Следующие два обработчика запускают методы resolve и reject.
 
+type objType = {
+    promise: null | Promise<any>
+    resolve: null | Function
+    reject: null | Function
+    onSuccess: (paramName: string) => void
+    onError: (paramName: string) => void
+}
+
+const someObj: objType = {
+    promise: null,
+    resolve: null,
+    reject: null,
+    onSuccess(paramName: string) {
+        console.log(`Promise is resolved with data: ${paramName}`)
+    },
+    onError(paramName: string) {
+        console.log(`Promise is rejected with error: ${paramName}`)
+    },
+}
+
+export const createPromise = () => {
+    someObj.promise = new Promise((res, rej) => {
+        someObj.resolve = res
+        someObj.reject = rej
+    })
+    someObj.promise
+        .then(someObj.onSuccess)
+        .catch(someObj.onError)
+    // @ts-ignore
+    window.obj = someObj
+}
+
+export const resolvePromise = () => {
+    someObj.resolve && someObj.resolve('Success')
+}
+
+export const rejectPromise = () => {
+    someObj.reject && someObj.reject('Error')
+}
 
 // Task 06
 // Создайте промис, который через 1 с возвращает строку "My name is".
@@ -57,6 +126,6 @@ console.log('lesson 4');
 // и выведите в консоль {name, age, city}
 
 
-
 // just a plug
-export default ()=>{};
+export default () => {
+};
